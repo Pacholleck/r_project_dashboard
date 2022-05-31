@@ -133,3 +133,45 @@ for (i in 1:length(colnames(poland))){
 
 poland$Time.Code <- NULL
 
+
+basic_clean <- function(dataset){
+  col_num <- as.character(c(seq(2005,2021)))
+  if("X" %in% colnames(dataset) == TRUE) {dataset[,"X"] <- NULL}
+  colnames(dataset) <- c('Code', 'Name',seq(2005,2021))
+  dataset[col_num] <- sapply(dataset[col_num],as.numeric)
+  return (dataset)
+}
+
+prices_index_consumer_good_total <- prices_index_consumer_good[,1:19]
+prices_index_consumer_good_total <- basic_clean(prices_index_consumer_good_total)
+
+prices_index_consumer_good_food <- prices_index_consumer_good[,c(1,2,seq(20,36))]
+prices_index_consumer_good_food <- basic_clean(prices_index_consumer_good_food)
+
+prices_index_consumer_good_alc <- prices_index_consumer_good[,c(1,2,seq(37,53))]
+prices_index_consumer_good_alc <- basic_clean(prices_index_consumer_good_alc)
+
+prices_index_consumer_good_clothing <- prices_index_consumer_good[,c(1,2,seq(54,70))]
+prices_index_consumer_good_clothing <- basic_clean(prices_index_consumer_good_clothing)
+
+prices_index_consumer_good_dwelling <- prices_index_consumer_good[,c(1,2,seq(71,87))]
+prices_index_consumer_good_dwelling <- basic_clean(prices_index_consumer_good_dwelling)
+
+prices_index_consumer_good_health <- prices_index_consumer_good[,c(1,2,seq(88,104))]
+prices_index_consumer_good_health <- basic_clean(prices_index_consumer_good_health)
+
+prices_index_consumer_good_transport <- prices_index_consumer_good[,c(1,2,seq(105,121))]
+prices_index_consumer_good_total <- basic_clean(prices_index_consumer_good_total)
+
+prices_index_consumer_good_recreation <- prices_index_consumer_good[,c(1,2,seq(122,138))]
+prices_index_consumer_good_recreation <- basic_clean(prices_index_consumer_good_recreation)
+
+prices_index_consumer_good_education <- prices_index_consumer_good[,c(1,2,seq(139,155))]
+prices_index_consumer_good_education <- basic_clean(prices_index_consumer_good_education)
+
+urban_population <- basic_clean(urban_population)
+road_accident <- basic_clean(road_accident)
+revenue_per_capita <- basic_clean(revenue_per_capita)
+retail_sale <- basic_clean(retail_sale)
+unemployment <- basic_clean(unemployment)
+unemployment <- basic_clean(unemployment)
