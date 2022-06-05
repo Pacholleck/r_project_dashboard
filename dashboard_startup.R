@@ -1,29 +1,59 @@
-# libraries
-library(data.table)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(maps)
-library(shiny)
-library(maps)
-library(ggiraph)
-library(scales)
 
-# set working directory
-dir_default = "C:/Users/duzzi/OneDrive/University of Warsaw/2nd Semester/Advanced R Programming/Advanced_R_Project/r_project_dashboard"
-setwd(dir_default)
+###############################################################################
+                     ### libraries  ###
 
-# load helper functions
-source("dashboard_helperFunctions.R")
-# load data
+
+requiredPackages = c("data.table", 
+                     "dplyr", 
+                     "tidyr",
+                     "tidyverse",
+                     "ggplot2", 
+                     "maps",
+                     "shiny",
+                     "maps",
+                     "ggiraph",
+                     "scales",
+                     "tseries",
+                     "lmtest")
+
+for(i in requiredPackages){
+  for(i in requiredPackages){if(!require(i,character.only = TRUE)) install.packages(i)}
+  for(i in requiredPackages){if(!require(i,character.only = TRUE)) library(i,character.only = TRUE) } 
+}
+
+
+###############################################################################
+                         ### set working directory ###
+dir  <- "C:\\Users\\Adnan_Sevinc\\OneDrive - EPAM\\University\\2.Semester\\Advanced Programming in R 2400-DS1APR\\Project\\apr_project"
+setwd(dir)
+
+list.files(path=".", pattern=NULL, all.files=FALSE,
+           full.names=FALSE)
+
+###############################################################################
+                           ### load data  ###
+
 source("dashboard_loadData.R")
-# load chart generators
-source("dashboard_charts.R")
-# load shiny app components
+
+
+###############################################################################
+                          ### shiny_ui  ###
+setwd(dir)
 source("dashboard_shiny_ui.R")
+
+
+###############################################################################
+                    ### shiny_server  ###
+
 source("dashboard_shiny_server.R")
 
-# start ShinyApp
+
+###############################################################################
+                      ### start ShinyApp  ###
+
 shinyApp(ui = ui, server = server)
+
+
+
 
 
