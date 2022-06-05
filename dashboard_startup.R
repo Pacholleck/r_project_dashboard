@@ -24,7 +24,7 @@ for(i in requiredPackages){
 
 ###############################################################################
                          ### set working directory ###
-dir  <- "C:\\Users\\Adnan_Sevinc\\OneDrive - EPAM\\University\\2.Semester\\Advanced Programming in R 2400-DS1APR\\Project\\apr_project"
+dir  <- "C:/Users/duzzi/OneDrive/University of Warsaw/2nd Semester/Advanced R Programming/Advanced_R_Project/r_project_dashboard"
 setwd(dir)
 
 list.files(path=".", pattern=NULL, all.files=FALSE,
@@ -38,7 +38,6 @@ source("dashboard_loadData.R")
 
 ###############################################################################
                           ### shiny_ui  ###
-setwd(dir)
 source("dashboard_shiny_ui.R")
 
 

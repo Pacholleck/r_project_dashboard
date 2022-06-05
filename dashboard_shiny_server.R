@@ -1,7 +1,6 @@
 server <- function(input, output, session) {
-  
-  
-  #First Dashboard
+   
+  # Economic indicators Poland
   
   plot_title <- reactive({
     Sys.sleep(2)
@@ -9,17 +8,17 @@ server <- function(input, output, session) {
     isolate(input$title) 
   })
   
-  poland
-  
   output$plt1 <- renderPlot({
-    Sys.sleep(2)
+    validate(
+      need(input$indicator != "", "Please provide at least one indicator!"))
+
+    #Sys.sleep(2)
     indicators <-
       poland %>% 
-      filter(Time > input$date[1] & Time < input$date[2]) %>% 
+      filter(between(year(Time),input$date[1],input$date[2])) %>% 
       select(Time,input$indicator) %>%
       melt(id=c("Time")) %>%
       mutate(variable = as.character(variable), value = as.numeric(value))
-    
     
     
     ggplot(indicators, aes(x = Time, y = value)) + 
@@ -32,9 +31,36 @@ server <- function(input, output, session) {
     
   })
   
+  # output$plt2 <- renderPlot({
+  #   validate(
+  #     need(input$voivodship != "", "Please provide at least one Voivodship!"))
+  # 
+  #   #Sys.sleep(2)
+  #   indicators1 <-
+  #     df_voivodships %>%
+  #     filter(between(Year,input$date1[1],input$date1[2]), input$voivodship) %>%
+  #     select(Year,input$indicator1) %>%
+  #     melt(id=c("Year")) %>%
+  #     mutate(variable = as.character(variable), value = as.numeric(value))
+  # 
+  # 
+  # 
+  #   ggplot(indicators1, aes(x = Year, y = value)) +
+  #     geom_line(aes(color = variable, linetype = variable)) +
+  #     xlab("Year") +
+  #     ylab("Values") +
+  #     scale_y_continuous(labels = label_number(suffix = " M", scale = 1e-6))+
+  #     ggtitle(plot_title())+
+  #     theme(plot.title = element_text(size = 30, hjust = 0.5))
+  # 
+  # })
+  
   #Obtaining Residuals
   
   regression_1<-reactive({
+    validate(
+      need(input$xcol != "" | input$ycol != "", "Please provide a Regression dimensions!")
+    )
     
     x <- as.numeric(reg_data[[as.name(input$xcol)]])
     y <- as.numeric(reg_data[[as.name(input$ycol)]])
@@ -84,7 +110,6 @@ server <- function(input, output, session) {
                                  pageLength = 15,
                                  autoWidth = TRUE), 
                   rownames = FALSE)
-  })
-  
+  }) 
 }
 

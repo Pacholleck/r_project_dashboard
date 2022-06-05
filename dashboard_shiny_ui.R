@@ -1,6 +1,6 @@
 ui <- fluidPage(
-  navbarPage("Poland Economic Indicators",
-             tabPanel("WDO data",
+  navbarPage("Poland",
+             tabPanel("All Poland",
                       titlePanel("Indicators Over Poland"),
                       sidebarLayout(
                         sidebarPanel(
@@ -10,11 +10,11 @@ ui <- fluidPage(
                                       multiple = TRUE,
                                       selectize = TRUE
                           ),
-                          dateRangeInput("date", h5("Date range"),
-                                         start = "1990-01-01",
-                                         end = lastUpdate,
-                                         min = "1990-01-01",
-                                         max = lastUpdate),
+                          sliderInput("date", h5("Date range"),
+                                         min = 1990,
+                                         max = 2020,
+                                         value = c(1990,2020),
+                                         sep = ""),
                           textInput("title", "Title of chart:"),
                           actionButton("accept_title", "change title")
                         ),
@@ -24,7 +24,7 @@ ui <- fluidPage(
                       
              ),
              tabPanel("Econometric Analysis",
-                      titlePanel("Regressin Analysis"),
+                      titlePanel("Regression Analysis"),
                       sidebarLayout(
                         sidebarPanel(
                           selectInput(
@@ -51,6 +51,39 @@ ui <- fluidPage(
                           )))
                       
                       
-             ))
+             )
+             # ,
+             # tabPanel("Voivodeships",
+             #          titlePanel("Indicators Within Voivodeships"),
+             #          sidebarLayout(
+             #            sidebarPanel(
+             #              selectInput("indicator1", h5("Select indicator"),
+             #                          choices = colnames(df_voivodships[,c(4:length(colnames(df_voivodships)))]),
+             #                          selected = "average_salary",
+             #                          multiple = FALSE,
+             #                          selectize = TRUE
+             #              ),
+             #              selectInput("voivodship", h5("Select Voivodship"),
+             #                          choices = unique(df_voivodships$Voivoidship),
+             #                          selected = "POLAND",
+             #                          multiple = TRUE,
+             #                          selectize = TRUE
+             #              ),
+             #              sliderInput("date1", h5("Date range"),
+             #                          min = 2005,
+             #                          max = 2021,
+             #                          value = c(2005,2021),
+             #                          sep = ""),
+             #              textInput("title", "Title of chart:"),
+             #              actionButton("accept_title", "change title")
+             #            ),
+             #            mainPanel(
+             #              plotOutput("plt2")
+             #            ))
+             # 
+             # )
+             
+             
+             )
 )
 
