@@ -2,11 +2,8 @@
 # READ DATASETS
 ###################
 
-
-# Set Directory
-
-setwd("")
-getwd()
+dir_data <- "C:\\Users\\Adnan_Sevinc\\OneDrive - EPAM\\University\\2.Semester\\Advanced Programming in R 2400-DS1APR\\Project\\apr_project\\data"
+setwd(dir_data)
 
 # Data set by country
 poland <- read.csv("poland economic indicator from world data bank.csv")
@@ -32,13 +29,10 @@ urban_population <-read.csv2("Urban population in % of total population (half-ye
 
 #Expenditure education
 
-library(tidyverse)
-library(dplyr)
-
 expenditure_education <- 
   expenditure_education %>% 
   select(-c(for.education.2021..PLN.,X))
- 
+
 for (i in 2:18){
   colnames(expenditure_education)[i] <- substr(colnames(expenditure_education)[i],15,18)
 }
@@ -99,30 +93,30 @@ colnames(average_salary)[2] <- "City"
 
 poland <- slice(poland, -c(32:37))  #for deleting rows
 
-polcolnames <- c("Country.Name"	,
-                 "Country.Code"	,
+polcolnames <- c("Country"	,
+                 "Code"	,
                  "Time"	,
                  "Time.Code"	,
                  "GDP.current.US"	,
                  "GDP.per.capita.current.US"	,
                  "GDP.growth.annual"	,
-                 "GDP.per.capita.PPP.current.international"	,
-                 "Consumer.price.index.2010.100"	,
-                 "Birth.rate.crude.per.1.000.people"	,
-                 "Fertility.rate.total.births.per.woman"	,
-                 "Life.expectancy.at.birth.female.years"	,
-                 "Life.expectancy.at.birth.male.years"	,
-                 "CO2.emissions.metric.tons.per.capita"	,
-                 "Energy.imports.net.of.energy.use"	,
-                 "Energy.use.kg.of.oil.equivalent.per.capita"	,
+                 "GDP.per.capita.PPP"	,
+                 "CPI"	,
+                 "Birth.rate"	,
+                 "Fertility.rate"	,
+                 "Life.expectancy.female"	,
+                 "Life.expectancy.male"	,
+                 "CO2"	,
+                 "Energy.imports"	,
+                 "Energy.use"	,
                  "Fossil.fuel.energy.consumption"	,
-                 "Renewable.energy.consumption."	,
-                 "Adjusted.savings.education.expenditure.current.US."	,
-                 "Compulsory.education.duration.years."	,
+                 "Renewable.energy.consumption"	,
+                 "Education.expenditure.current.US"	,
+                 "Compulsory.education"	,
                  "Military.expenditure.of.GDP"	,
-                 "Current.health.expenditure.of.GDP"	,
-                 "Imports.of.goods.and.services.current.LCU"	,
-                 "Exports.of.goods.and.services.current.LCU"	,
+                 "Health.expenditure.of.GDP"	,
+                 "Imports"	,
+                 "Exports"	,
                  "Inflation.GDP.deflator.annual"	
 )
 
@@ -133,6 +127,23 @@ for (i in 1:length(colnames(poland))){
 
 poland$Time.Code <- NULL
 
+poland$Time <- as.Date(paste(poland$Time, 1, 1, sep = "-"))
+          
+lastUpdate <- max(poland$Time)
+
+for (i in 4:length(colnames(poland))){
+  poland[i] = as.numeric(poland[,i])
+}
+
+reg_data <-na.omit(poland)
+
+for (i in 4:length(colnames(reg_data))){
+  reg_data[i] = log(reg_data[,i])
+}
+
+
+
+###########################
 
 basic_clean <- function(dataset){
   col_num <- as.character(c(seq(2005,2021)))
