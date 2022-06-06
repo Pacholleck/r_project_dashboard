@@ -43,7 +43,7 @@ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 - Functions (x)
 - Data Processing (x)
 - Shiny App (x)
-- RMarkdown (only presentation)
+- RMarkdown (presentation)
 
 ## Visual Effects
 #### Let's have a look :D
@@ -52,6 +52,9 @@ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 -  \> 10 datasets
 - 1x World Data Bank Indicator ^[https://databank.worldbank.org/source/world-development-indicators]
 - 9x Statistic Poland ^[https://bdl.stat.gov.pl/bdl/start]
+
+## Backup
+![Impression of App](Images/impression_app.png)
 
 
 
