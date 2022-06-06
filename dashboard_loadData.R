@@ -2,13 +2,12 @@
 # READ DATASETS
 ###################
 
-  #dir_data <- "C:\\Users\\Adnan_Sevinc\\OneDrive - EPAM\\University\\2.Semester\\Advanced Programming in R 2400-DS1APR\\Project\\apr_project\\data"
-  setwd(dir)
-  
+  setwd(dirname(rstudioapi::getSourceEditorContext()$path))  
+
   # Data set by country
   poland <- read.csv("data/poland economic indicator from world data bank.csv")
   
-  # Data set by city
+  # Data set by voivodship
   expenditure_education <- read.csv2("data/Expenditure per capita for education by city .csv", fileEncoding = "UTF-8")
   expenditure_total <- read.csv2("data/Expenditure per capita grand total by city.csv", fileEncoding = "UTF-8")
   average_salary <- read.csv2("data/Average monthly gross wages and salaries by city.csv",fileEncoding = "UTF-8")
@@ -24,10 +23,12 @@
   
   
   ##################
-  # Data Preparation
+  #Data Preparation#
   ##################
   
-  #poland
+  ###########################
+  ##########Poland###########
+  ###########################
   
   
   poland <- slice(poland, -c(32:37))  #for deleting rows
@@ -134,7 +135,7 @@
   basic_clean <- function(dataset){
     col_num <- as.character(c(seq(2005,2021)))
     if("X" %in% colnames(dataset) == TRUE) {dataset %>% select(-X)}
-    colnames(dataset) <- c('Code', 'Voivoidship',seq(2005,2021))
+    colnames(dataset) <- c('Code', 'Voivodeship',seq(2005,2021))
     dataset<- dataset[!is.na(names(dataset))]
     dataset[col_num] <- sapply(dataset[col_num],as.numeric)
     return (dataset)
@@ -145,14 +146,14 @@
 
 
   
-  dataframes <- lapply(dataframes,function(x) melt(x, id = c('Code','Voivoidship'),variable.name = "Year"))
+  dataframes <- lapply(dataframes,function(x) melt(x, id = c('Code','Voivodeship'),variable.name = "Year"))
   
   df_names <- names(dataframes)
   for (i in 1:length(df_names)){
-    colnames(dataframes[[i]]) <- c('Code', 'Voivoidship','Year',df_names[i])
+    colnames(dataframes[[i]]) <- c('Code', 'Voivodeship','Year',df_names[i])
   }
 
-  df_voivodships <- Reduce(function(x, y) merge(x, y, all=TRUE), dataframes)
-  df_voivodships$Year <- as.numeric(as.character(df_voivodships$Year))
+  df_Voivodeship <- Reduce(function(x, y) merge(x, y, all=TRUE), dataframes)
+  df_Voivodeship$Year <- as.numeric(as.character(df_voivodships$Year))
   
   

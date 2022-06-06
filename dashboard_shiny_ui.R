@@ -52,36 +52,64 @@ ui <- fluidPage(
                       
                       
              )
-             # ,
-             # tabPanel("Voivodeships",
-             #          titlePanel("Indicators Within Voivodeships"),
-             #          sidebarLayout(
-             #            sidebarPanel(
-             #              selectInput("indicator1", h5("Select indicator"),
-             #                          choices = colnames(df_voivodships[,c(4:length(colnames(df_voivodships)))]),
-             #                          selected = "average_salary",
-             #                          multiple = FALSE,
-             #                          selectize = TRUE
-             #              ),
-             #              selectInput("voivodship", h5("Select Voivodship"),
-             #                          choices = unique(df_voivodships$Voivoidship),
-             #                          selected = "POLAND",
-             #                          multiple = TRUE,
-             #                          selectize = TRUE
-             #              ),
-             #              sliderInput("date1", h5("Date range"),
-             #                          min = 2005,
-             #                          max = 2021,
-             #                          value = c(2005,2021),
-             #                          sep = ""),
-             #              textInput("title", "Title of chart:"),
-             #              actionButton("accept_title", "change title")
-             #            ),
-             #            mainPanel(
-             #              plotOutput("plt2")
-             #            ))
-             # 
-             # )
+             ,
+             tabPanel("Voivodeships",
+                      titlePanel("Indicators Within Voivodeships"),
+                      sidebarLayout(
+                        sidebarPanel(
+                          selectInput("indicator1", h5("Select indicator"),
+                                      choices = colnames(df_Voivodeship[,c(4:11)]),
+                                      selected = "average_salary",
+                                      multiple = FALSE,
+                                      selectize = TRUE
+                          ),
+                          selectInput("Voivodeship", h5("Select Voivodeship"),
+                                      choices = unique(df_Voivodeship$Voivodeship),
+                                      selected = "POLAND",
+                                      multiple = TRUE,
+                                      selectize = TRUE
+                          ),
+                          sliderInput("date1", h5("Date range"),
+                                      min = 2005,
+                                      max = 2021,
+                                      value = c(2005,2021),
+                                      sep = ""),
+                          textInput("title", "Title of chart:"),
+                          actionButton("accept_title", "change title")
+                        ),
+                        mainPanel(
+                          plotOutput("plt3")
+                        ))
+
+             )
+             ,
+             tabPanel("Consumer Price Index",
+                      titlePanel("Prices Within Voivodeships"),
+                      sidebarLayout(
+                        sidebarPanel(
+                          selectInput("indicator2", h5("Select indicator"),
+                                      choices = colnames(df_Voivodeship[,c(12:length(colnames(df_Voivodeship)))]),
+                                      selected = "prices_index_consumer_good_total",
+                                      multiple = TRUE,
+                                      selectize = TRUE
+                          ),
+                          selectInput("Voivodeship2", h5("Select Voivodeship"),
+                                      choices = unique(df_Voivodeship$Voivodeship),
+                                      selected = "POLAND",
+                                      multiple = TRUE,
+                                      selectize = TRUE
+                          ),
+                          sliderInput("date2", h5("Date range"),
+                                      min = 2005,
+                                      max = 2021,
+                                      value = c(2005,2021),
+                                      sep = "")
+                        ),
+                        mainPanel(
+                          plotOutput("plt4")
+                        ))
+                      
+             )
              
              
              )

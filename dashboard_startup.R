@@ -24,8 +24,7 @@ for(i in requiredPackages){
 
 ###############################################################################
                          ### set working directory ###
-dir  <- "C:/Users/duzzi/OneDrive/University of Warsaw/2nd Semester/Advanced R Programming/Advanced_R_Project/r_project_dashboard"
-setwd(dir)
+setwd(dirname(rstudioapi::getSourceEditorContext()$path)) 
 
 list.files(path=".", pattern=NULL, all.files=FALSE,
            full.names=FALSE)
