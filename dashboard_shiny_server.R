@@ -1,6 +1,6 @@
 server <- function(input, output, session) {
    
-  # Economic indicators Poland
+#### Economic indicators Poland ####
   
   plot_title <- reactive({
     Sys.sleep(1)
@@ -31,7 +31,8 @@ server <- function(input, output, session) {
   })
   
   
-#### Voivodeships ###
+#### Voivodeships ####
+  
   output$plt3 <- renderPlot({
     validate(
       need(input$Voivodeship != "", "Please provide at least one Voivodeship!"))
@@ -53,10 +54,13 @@ server <- function(input, output, session) {
 
   })
 
-#### Consumer Price Index  
+#### Consumer Price Index ####
+  
   output$plt4 <- renderPlot({
     validate(
-      need(input$Voivodeship != "", "Please provide at least one Voivodeship!"))
+      need(input$Voivodeship != "", "Please provide at least one Voivodeship!"),
+      need(input$indicator2 != "", "Please provide at least one Indicator!")
+      )
     
     Sys.sleep(1)
     indicators2 <-
@@ -97,7 +101,7 @@ server <- function(input, output, session) {
 
   })
   
-#### Economometric ####
+#### Economometric Model ####
   
   #Obtaining Residuals
   

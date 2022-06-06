@@ -1,6 +1,6 @@
 ui <- fluidPage(
-  navbarPage("Poland",
-             tabPanel("All Poland",
+  navbarPage("Economy Poland",
+             tabPanel("Overview",
                       titlePanel("Indicators Over Poland"),
                       sidebarLayout(
                         sidebarPanel(

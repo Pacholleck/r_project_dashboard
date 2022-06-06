@@ -154,6 +154,6 @@
   }
 
   df_Voivodeship <- Reduce(function(x, y) merge(x, y, all=TRUE), dataframes)
-  df_Voivodeship$Year <- as.numeric(as.character(df_voivodships$Year))
+  df_Voivodeship$Year <- as.numeric(as.character(df_Voivodeship$Year))
   
   
