@@ -122,14 +122,17 @@
                      retail_sale=retail_sale,
                      road_accident = road_accident,
                      revenue_per_capita = revenue_per_capita,
+                     prices_index_consumer_good_total=prices_index_consumer_good_total,
+                     prices_index_consumer_good_food =prices_index_consumer_good_food,
+                     prices_index_consumer_good_alc=prices_index_consumer_good_alc,
                      prices_index_consumer_good_education = prices_index_consumer_good_education,
                      prices_index_consumer_good_recreation = prices_index_consumer_good_recreation,
                      prices_index_consumer_good_transport = prices_index_consumer_good_transport,
                      prices_index_consumer_good_dwelling=prices_index_consumer_good_dwelling,
-                     prices_index_consumer_good_clothing=prices_index_consumer_good_clothing,
-                     prices_index_consumer_good_alc=prices_index_consumer_good_alc,
-                     prices_index_consumer_good_food =prices_index_consumer_good_food,
-                     prices_index_consumer_good_total=prices_index_consumer_good_total
+                     prices_index_consumer_good_clothing=prices_index_consumer_good_clothing
+                     
+                     
+                     
                      )
   
   basic_clean <- function(dataset){

@@ -1,0 +1,57 @@
+---
+title: "Polish Economy - A Shiny Dashboard"
+author: "Adnan Sevinc, Dustin Pacholleck"
+date: "2022-06-07"
+output: 
+  beamer_presentation:
+    theme: "default"
+    colortheme: "beaver"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{R include=FALSE}
+library(knitr)
+setwd(dirname(rstudioapi::getSourceEditorContext()$path)) 
+```
+
+
+## Table of Content
+
+- Idea
+- Goals
+- Visual Effects
+- Data
+
+
+## Idea
+
+
+![Economy](Images/icon.png){width=50%}[^note]
+
+- Easy **Overview** of the Polish Economy with its key indicators.
+- Get to know the **differences in the Voivodeships**.
+
+
+
+[^note]: image: Flaticon.com
+
+## Goals
+
+- Functions (x)
+- Data Processing (x)
+- Shiny App (x)
+- RMarkdown (only presentation)
+
+## Visual Effects
+#### Let's have a look :D
+
+## Data
+-  \> 10 datasets
+- 1x World Data Bank Indicator ^[https://databank.worldbank.org/source/world-development-indicators]
+- 9x Statistic Poland ^[https://bdl.stat.gov.pl/bdl/start]
+
+
+
