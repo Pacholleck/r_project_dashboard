@@ -54,7 +54,9 @@ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 - 9x Statistic Poland ^[https://bdl.stat.gov.pl/bdl/start]
 
 ## Backup
-![Impression of App](Images/impression_app.png)
+![Impression of App: Indicators](Images/impression_app.png)
 
+## Backup 2
 
+![Impression of App: Regression](Images/impression_app2.png)
 
