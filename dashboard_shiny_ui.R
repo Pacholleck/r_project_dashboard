@@ -29,7 +29,7 @@ ui <- fluidPage(
                         sidebarPanel(
                           selectInput(
                             inputId = "xcol", 
-                            label = h3("Independent Variable(s)"),
+                            label = h3("Independent Variable"),
                             choices = colnames(poland[,c(4:length(colnames(poland)))])), # List of values to select from
                           selectInput(inputId = "ycol", 
                                       label = h3("Dependent Variable"), 
