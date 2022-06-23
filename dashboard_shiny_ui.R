@@ -1,3 +1,4 @@
+#Shiny ui 
 ui <- fluidPage(
   navbarPage("Economy Poland",
              tabPanel("Overview",
@@ -89,7 +90,7 @@ ui <- fluidPage(
                         sidebarPanel(
                           selectInput("indicator2", h5("Select indicator"),
                                       choices = colnames(df_Voivodeship[,c(12:length(colnames(df_Voivodeship)))]),
-                                      selected = "prices_index_consumer_good_total",
+                                      selected = "CPI_total",
                                       multiple = TRUE,
                                       selectize = TRUE
                           ),
@@ -113,5 +114,6 @@ ui <- fluidPage(
              
              
              )
+  
 )
 
