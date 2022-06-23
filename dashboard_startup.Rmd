@@ -1,0 +1,142 @@
+---
+title: "Polish Economy - A Shiny Dashboard"
+author: "Adnan Sevinc (437971), Dustin Pacholleck (437968)"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    theme: flatly
+    toc: true
+runtime: shiny
+---
+
+
+# Introduction
+In our project, we will be creating a dashboard within a RMarkdown Report in order to **illustrate economic indicators of Poland** such as GDP, Population, Unemployment rate, CO2 emissions, Education expenditure, etc.   
+The data is obtained from World Data Bank https://databank.worldbank.org/source/world-development-indicators and Statistics Poland.
+
+# Requirements
+1.	Writing own functions in R (including defensive programming)  
+2.	Advanced data processing with dplyr, dtplyr, tidyr  
+3.	Shiny + creating analytical dashboards    
+4.	Automation of scripts and reports (RMarkdown)   
+
+# Description
+The app consists of four different tabs which allow the user to dive into the economy of Poland.  
+
+**1. Overview**    
+The Overview allows to investigate different indicators on the level of whole Poland.     
+
+**2. Econometric Analysis**  
+The users can construct a simple econometric model in order to see the relationships between different economic indicators and   their significance level. Furthermore, the diagnostic tests can be obtained in order to verify the model assumptions.   
+ 
+**3. Voivodeships**  
+Similar to the first tab, this tab allows to investigate different economic indicators. In contrast, here the user gets data   presented on Voivodeship level and can even compare different Voivodeships.  
+
+**4. Consumer Price Index**    
+Due to the rising level of inflation this tab allows to investigate how the Consumer Price Index changes in different   Voivodeships over time.  
+  
+
+```{r include=FALSE}
+
+###############################################################################
+                     ### libraries  ###
+
+
+requiredPackages = c("data.table", 
+                     "dplyr", 
+                     "tidyr",
+                     "tidyverse",
+                     "ggplot2", 
+                     "maps",
+                     "shiny",
+                     "maps",
+                     "ggiraph",
+                     "scales",
+                     "tseries",
+                     "lmtest",
+                     "knitr")
+
+for(i in requiredPackages){
+  for(i in requiredPackages){if(!require(i,character.only = TRUE)) install.packages(i)}
+  for(i in requiredPackages){if(!require(i,character.only = TRUE)) library(i,character.only = TRUE) } 
+}
+
+
+###############################################################################
+                     ### libraries  ###
+
+
+requiredPackages = c("data.table", 
+                     "dplyr", 
+                     "tidyr",
+                     "tidyverse",
+                     "ggplot2", 
+                     "maps",
+                     "shiny",
+                     "maps",
+                     "ggiraph",
+                     "scales",
+                     "tseries",
+                     "lmtest")
+
+for(i in requiredPackages){
+  for(i in requiredPackages){if(!require(i,character.only = TRUE)) install.packages(i)}
+  for(i in requiredPackages){if(!require(i,character.only = TRUE)) library(i,character.only = TRUE) } 
+}
+
+
+###############################################################################
+                         ### set working directory ###
+setwd(dirname(rstudioapi::getSourceEditorContext()$path)) 
+
+list.files(path=".", pattern=NULL, all.files=FALSE,
+           full.names=FALSE)
+
+###############################################################################
+                           ### load data  ###
+
+source("dashboard_loadData.R")
+
+
+###############################################################################
+                          ### shiny_ui  ###
+source("dashboard_shiny_ui.R")
+
+
+###############################################################################
+                    ### shiny_server  ###
+
+source("dashboard_shiny_server.R")
+
+
+###############################################################################
+                      ### start ShinyApp  ###
+```
+
+# Available indicators {.tabset}
+
+## Indicators for Poland
+```{r echo=FALSE}
+names(poland) %>%
+  kable(col.names =  NULL)
+```
+
+## Indicators on Voivodeship Level
+```{r echo=FALSE}
+names(dataframes) %>%
+  kable(col.names = NULL)
+```
+
+# Application
+
+```{R echo=FALSE}
+shinyApp(ui = ui, server = server, options=list(height=900))
+```
+
+
+
+
+
+
+
+
