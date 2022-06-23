@@ -1,17 +1,22 @@
+# Shiny Server which processes the inputs
 server <- function(input, output, session) {
    
 #### Economic indicators Poland ####
   
+  # get manual plot title
   plot_title <- reactive({
     Sys.sleep(1)
     input$accept_title
     isolate(input$title) 
   })
   
+  
+  # Validate Input
   output$plt1 <- renderPlot({
     validate(
       need(input$indicator != "", "Please provide at least one indicator!"))
-
+  
+  # Process the indicator data
     Sys.sleep(1)
     indicators <-
       poland %>% 
@@ -20,7 +25,7 @@ server <- function(input, output, session) {
       melt(id=c("Time")) %>%
       mutate(variable = as.character(variable), value = as.numeric(value))
     
-    
+    # Plot data
     ggplot(indicators, aes(x = Time, y = value)) + 
       geom_line(aes(color = variable, linetype = variable)) + 
       xlab("Year") +
@@ -33,10 +38,12 @@ server <- function(input, output, session) {
   
 #### Voivodeships ####
   
+  # Validate Input
   output$plt3 <- renderPlot({
     validate(
       need(input$Voivodeship != "", "Please provide at least one Voivodeship!"))
 
+    # Process the indicator data
     Sys.sleep(1)
     indicators1 <-
       df_Voivodeship %>%
@@ -44,7 +51,7 @@ server <- function(input, output, session) {
       select(Year,Voivodeship, input$indicator1)
 
 
-
+    # Plot data
     ggplot(indicators1, aes(x = Year, y = indicators1[,3])) +
       geom_line(aes(color = Voivodeship, linetype = Voivodeship)) +
       xlab("Year") +
@@ -56,31 +63,20 @@ server <- function(input, output, session) {
 
 #### Consumer Price Index ####
   
+  # Validate Input
   output$plt4 <- renderPlot({
     validate(
       need(input$Voivodeship != "", "Please provide at least one Voivodeship!"),
       need(input$indicator2 != "", "Please provide at least one Indicator!")
       )
     
-    Sys.sleep(1)
-    indicators2 <-
-      df_Voivodeship %>%
-      filter(between(Year,input$date2[1],input$date2[2]), Voivodeship %in% input$Voivodeship) %>%
-      select(Year,Voivodeship, input$indicator2)
-    
-    
-    
-    ggplot(indicators2, aes(x = Year, y = indicators2[,3])) +
-      geom_line(aes(color = Voivodeship, linetype = Voivodeship)) +
-      xlab("Year") +
-      ylab("Values") +
-      scale_y_continuous(labels = label_number(suffix = " M", scale = 1e-6))
-    
+    # Process the indicator data
     indicators2 <-
       df_Voivodeship %>%
       filter(between(Year,input$date2[1],input$date2[2]), Voivodeship %in% input$Voivodeship2) %>%
       select(Year,Voivodeship, input$indicator2)
     
+    # Plot data
     plot_list <- list()
     
     for (x in 3:(length(input$indicator2)+2)){
@@ -165,7 +161,7 @@ server <- function(input, output, session) {
 
 
 
-############ Helper ###############
+############ Helper for Multiplot ###############
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   require(grid)
   
